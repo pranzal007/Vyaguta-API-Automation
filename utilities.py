@@ -5,8 +5,7 @@ def get_request(endpoint, headers=None):
     url = f"{configure.base_url}/{endpoint}"
     response = requests.get(url, headers=headers)
     return response
-
-def post_request(endpoint,headers=None, payload)
+def post_request(endpoint,headers=None,payload=None):
     url= f"{configure.base_url}/{endpoint}"
     response = requests.post(url,headers=headers,json=payload)
     return response

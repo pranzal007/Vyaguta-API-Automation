@@ -9,3 +9,13 @@ def post_request(endpoint,headers=None,payload=None):
     url= f"{configure.base_url}/{endpoint}"
     response = requests.post(url,headers=headers,json=payload)
     return response
+
+def put_request(endpoint,headers=None, payload=None):
+    url= f"{configure.base_url}/{endpoint}"
+    response = requests.put(url,headers=headers,json=payload)
+    return response
+
+def delete_request(endpoint,headers=None,payload=None):
+    url= f"{configure.base_url}/{endpoint}"
+    response = requests.put(url,headers=headers,json=payload)
+    return response

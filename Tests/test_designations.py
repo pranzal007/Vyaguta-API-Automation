@@ -3,6 +3,7 @@ from utilities import get_request
 from Data.Test_data import Data
 from login_setup import get_access_token
 from utilities import post_request
+from utilities import put_request
 
 @pytest.fixture(scope="module")
 def access_token():
@@ -31,15 +32,17 @@ def test_post_designations_positive(access_token):
     assert payload['name'] == data_set['data']['name']
     data_id= data_set['data']['id']
     data_name= data_set['data']['name']
-    fetch_data= [data_id,data_name]
-    print (fetch_data[1])
+    fetch_data= {
+        'id': data_id,
+        'name': data_name
+    }
     return fetch_data
 
 def test_post_designations_negetive (access_token):
     data= test_post_designations_positive(access_token)
-    headers= {"Authorization":f"Bearer Token"}
+    headers= {"Authorization": f"Bearer {access_token}"}
     payload_1 = {
-        'name': data[1],
+        'name': data['name'],
         'description': Data.description_generator(access_token),
         'status': 'True'
     }
@@ -50,8 +53,42 @@ def test_post_designations_negetive (access_token):
         'status': 'True'
     }
     response_1 = post_request("designations", headers, payload_1)
-    response_2=  post_request("designations", headers, payload_1)
+    response_2=  post_request("designations", headers, payload_2)
     assert response_1.status_code == 400
+    assert response_2.status_code == 400
+
+def test_update_designations_positive (access_token):
+    data = test_post_designations_positive(access_token)
+    headers = {"Authorization": f"Bearer {access_token}"}
+    payload = {
+        'name': Data.name_generator(access_token),
+        'description': Data.description_generator(access_token),
+        'status': 'True',
+        'id': data['id']
+    }
+    response= put_request(f"designations/{data['id']}",headers,payload)
+    assert response.status_code == 200
+    data_set = response.json()
+    fetch_id= data_set['data']['id']
+    return fetch_id
+
+def test_update_designations_negetive (access_token):
+    data = test_update_designations_positive(access_token)
+    headers = {"Authorization": f"Bearer {access_token}"}
+    payload = {
+        'name': '',
+        'description': Data.description_generator(access_token),
+        'status': 'True',
+        'id': data
+    }
+
+    response= put_request(f"designations/{data}",headers,payload)
+
+    assert response.status_code == 400
+
+
+
+
 
 
 

@@ -1,13 +1,12 @@
-import random
-import string
+from faker import Faker
 
 class Data:
     def name_generator(access_token):
-        first_name = ['Pranjal', 'Anuj', 'Saroj']
-        last_name = ['Timsina','Pokhrel','Karki']
-        full_name= f"{random.choice(first_name)} {random.choice(last_name)}"
+        fake= Faker()
+        full_name= fake.name()
         return full_name
 
     def description_generator(access_token):
-        description= (random.choice(string.ascii_letters))
-        return description
+        fake= Faker()
+        full_name= fake.name()
+        return full_name

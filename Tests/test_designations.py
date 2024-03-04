@@ -97,7 +97,7 @@ def test_update_designations_negetive(access_token):
     assert response.status_code == 400
 
 
-def test_delete_designations(access_token):
+def test_delete_designation(access_token):
     data = test_post_designations_positive(access_token)
     headers = {"Authorization": f"Bearer {access_token}"}
     response = delete_request(f"designations/{data['id']}", headers)

@@ -15,7 +15,7 @@ def put_request(endpoint,headers=None, payload=None):
     response = requests.put(url,headers=headers,json=payload)
     return response
 
-def delete_request(endpoint,headers=None,payload=None):
+def delete_request(endpoint,headers=None):
     url= f"{configure.base_url}/{endpoint}"
-    response = requests.put(url,headers=headers,json=payload)
+    response = requests.delete(url,headers=headers)
     return response

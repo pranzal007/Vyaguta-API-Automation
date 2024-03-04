@@ -84,7 +84,7 @@ def test_update_events_negetive(access_token):
     assert response.status_code == 400
 
 
-def test_delete_events(access_token):
+def test_delete_event(access_token):
     data = test_post_events_positive(access_token)
     headers = {"Authorization": f"Bearer {access_token}"}
     response = delete_request(f"events/{data['id']}", headers)

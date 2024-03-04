@@ -4,6 +4,7 @@ from Data.Test_data import Data
 from login_setup import get_access_token
 from utilities import post_request
 from utilities import put_request
+from utilities import delete_request
 
 @pytest.fixture(scope="module")
 def access_token():
@@ -85,6 +86,14 @@ def test_update_designations_negetive (access_token):
     response= put_request(f"designations/{data}",headers,payload)
 
     assert response.status_code == 400
+
+def test_delete_designations(access_token):
+    data = test_post_designations_positive(access_token)
+    headers = {"Authorization": f"Bearer {access_token}"}
+    response = delete_request(f"designations/{data['id']}",headers)
+    assert response.status_code == 200
+
+
 
 
 

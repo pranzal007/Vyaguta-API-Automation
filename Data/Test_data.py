@@ -8,5 +8,5 @@ class Data:
 
     def description_generator(access_token):
         fake= Faker()
-        full_name= fake.name()
-        return full_name
+        description= fake.name()
+        return description

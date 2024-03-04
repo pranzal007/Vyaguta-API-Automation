@@ -10,3 +10,8 @@ class Data:
         fake= Faker()
         description= fake.name()
         return description
+
+    def date_generator(access_token):
+        fake = Faker()
+        date = fake.date()
+        return date

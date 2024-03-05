@@ -28,10 +28,10 @@ def test_get_events_negetive(access_token):
 def test_post_events_positive(access_token):
     headers = {"Authorization": f"Bearer {access_token}"}
     payload = {
-        'name': Data.name_generator(access_token),
-        'description': Data.description_generator(access_token),
+        'name': Data.name_generator(self=None),
+        'description': Data.description_generator(self=None),
         'link': None,
-        'eventDate': Data.date_generator(access_token),
+        'eventDate': Data.date_generator(self=None),
     }
     response = post_request("events", headers, payload)
     assert response.status_code == 201
@@ -50,9 +50,9 @@ def test_post_events_negetive(access_token):
     headers = {"Authorization": f"Bearer {access_token}"}
     payload = {
         'name': '',
-        'description': Data.description_generator(access_token),
+        'description': Data.description_generator(self=None),
         'link': None,
-        'eventDate': Data.date_generator(access_token),
+        'eventDate': Data.date_generator(self=None),
     }
     response = post_request("events", headers, payload)
     assert response.status_code == 400
@@ -62,10 +62,10 @@ def test_update_events_positive(access_token):
     data = test_post_events_positive(access_token)
     headers = {"Authorization": f"Bearer {access_token}"}
     payload = {
-        'name': Data.name_generator(access_token),
-        'description': Data.description_generator(access_token),
+        'name': Data.name_generator(self=None),
+        'description': Data.description_generator(self=None),
         'link': None,
-        'eventDate': Data.date_generator(access_token),
+        'eventDate': Data.date_generator(self=None),
     }
     response = put_request(f"events/{data['id']}", headers, payload)
     assert response.status_code == 200
@@ -76,9 +76,9 @@ def test_update_events_negetive(access_token):
     headers = {"Authorization": f"Bearer {access_token}"}
     payload = {
         'name': '',
-        'description': Data.description_generator(access_token),
+        'description': Data.description_generator(self=None),
         'link': None,
-        'eventDate': Data.date_generator(access_token),
+        'eventDate': Data.date_generator(self=None),
     }
     response = put_request(f"events/{data['id']}", headers, payload)
     assert response.status_code == 400

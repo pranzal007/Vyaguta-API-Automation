@@ -1,5 +1,4 @@
 import pytest
-import sys
 from utilities import get_request
 from Data.Test_data import Data
 from login_setup import get_access_token
@@ -29,8 +28,8 @@ def test_get_designations_negetive(access_token):
 def test_post_designations_positive(access_token):
     headers = {"Authorization": f"Bearer {access_token}"}
     payload = {
-        'name': Data.name_generator(access_token),
-        'description': Data.description_generator(access_token),
+        'name': Data.name_generator(self=None),
+        'description': Data.description_generator(self=None),
         'status': 'True'
     }
     response = post_request("designations", headers, payload)
@@ -51,7 +50,7 @@ def test_post_designations_negetive(access_token):
     headers = {"Authorization": f"Bearer {access_token}"}
     payload_1 = {
         'name': data['name'],
-        'description': Data.description_generator(access_token),
+        'description': Data.description_generator(self=None),
         'status': 'True'
     }
 
@@ -70,7 +69,7 @@ def test_update_designations_positive(access_token):
     data = test_post_designations_positive(access_token)
     headers = {"Authorization": f"Bearer {access_token}"}
     payload = {
-        'name': Data.name_generator(access_token),
+        'name': Data.name_generator(self=None),
         'description': Data.description_generator(access_token),
         'status': 'True',
         'id': data['id']
@@ -87,7 +86,7 @@ def test_update_designations_negetive(access_token):
     headers = {"Authorization": f"Bearer {access_token}"}
     payload = {
         'name': '',
-        'description': Data.description_generator(access_token),
+        'description': Data.description_generator(self=None),
         'status': 'True',
         'id': data
     }
